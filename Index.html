@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WebCraft Studio — Websites That Grow Your Business</title>
+  <meta name="description" content="WebCraft Studio designs modern, AI-powered websites for small businesses, restaurants, gyms, and coaching centres." />
+  <style>
+    :root {
+      --navy: #050b1f;
+      --navy-2: #0a1430;
+      --card: #0e1a3c;
+      --electric: #00d1ff;
+      --electric-2: #4d8dff;
+      --white: #ffffff;
+      --muted: #aebad8;
+      --radius: 18px;
+      --shadow: 0 18px 50px rgba(0, 0, 0, .35);
+      --max: 1180px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(900px 500px at 85% -10%, rgba(0, 209, 255, .16), transparent 60%),
+        radial-gradient(700px 500px at 0% 20%, rgba(77, 141, 255, .14), transparent 55%),
+        var(--navy);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    .container {
+      width: min(100% - 2.5rem, var(--max));
+      margin-inline: auto;
+    }
+
+    .section { padding: 90px 0; }
+    .section-head { max-width: 720px; margin: 0 auto 48px; text-align: center; }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--electric);
+      font-size: .8rem;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    h1, h2, h3 { line-height: 1.15; letter-spacing: -.02em; }
+    h1 { font-size: clamp(2.5rem, 7vw, 4.4rem); font-weight: 900; }
+    h2 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); font-weight: 850; }
+    h3 { font-size: 1.2rem; font-weight: 750; }
+
+    .lead { color: var(--muted); font-size: 1.08rem; margin-top: 18px; }
+    .accent { color: var(--electric); }
+
+    /* Header */
+    .header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 100;
+      padding: 14px 0;
+      background: rgba(5, 11, 31, .72);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      font-size: 1.15rem;
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--electric), var(--electric-2));
+      color: #04122b;
+      font-weight: 900;
+    }
+
+    .nav-links { display: flex; align-items: center; gap: 26px; }
+    .nav-links a { color: var(--muted); font-weight: 600; font-size: .95rem; transition: color .2s; }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--white); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 26px;
+      font: inherit;
+      font-weight: 750;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s, background .2s, color .2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--electric), var(--electric-2));
+      color: #04122b;
+      box-shadow: 0 12px 30px rgba(0, 209, 255, .25);
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(0, 209, 255, .35); }
+
+    .btn-ghost {
+      border: 1px solid rgba(255, 255, 255, .2);
+      background: rgba(255, 255, 255, .04);
+      color: var(--white);
+    }
+
+    .btn-ghost:hover { border-color: var(--electric); color: var(--electric); transform: translateY(-2px); }
+
+    .btn-whatsapp { background: #25d366; color: #052b16; }
+    .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 16px 35px rgba(37, 211, 102, .3); }
+
+    .nav-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .05);
+      color: var(--white);
+      cursor: pointer;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: currentColor;
+      margin: 4px auto;
+      transition: .25s;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      align-items: center;
+      padding: 130px 0 80px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: center;
+      gap: 55px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border: 1px solid rgba(0, 209, 255, .35);
+      border-radius: 999px;
+      background: rgba(0, 209, 255, .08);
+      color: var(--electric);
+      font-size: .85rem;
+      font-weight: 700;
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 50px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .stat strong { display: block; font-size: 1.6rem; color: var(--electric); }
+    .stat span { color: var(--muted); font-size: .88rem; }
+
+    .hero-visual {
+      position: relative;
+      min-height: 430px;
+      border-radius: 26px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      background: linear-gradient(160deg, rgba(14, 26, 60, .95), rgba(5, 11, 31, .95));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      animation: float 7s ease-in-out infinite;
+    }
+
+    .browser-bar {
+      display: flex;
+      gap: 7px;
+      padding: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; }
+    .dot:nth-child(2) { background: #ffbd2e; }
+    .dot:nth-child(3) { background: #28c840; }
+
+    .mock {
+      padding: 28px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .mock-line { height: 12px; border-radius: 99px; background: rgba(255, 255, 255, .12); }
+    .mock-line.short { width: 55%; }
+    .mock-card {
+      height: 105px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(0, 209, 255, .22), rgba(77, 141, 255, .12));
+      border: 1px solid rgba(0, 209, 255, .25);
+    }
+
+    .floating-tag {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: rgba(5, 11, 31, .9);
+      border: 1px solid rgba(0, 209, 255, .35);
+      font-size: .85rem;
+      font-weight: 700;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    /* Cards */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+
+    .card {
+      padding: 30px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02));
+      border: 1px solid rgba(255, 255, 255, .09);
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 209, 255, .45);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, .32);
+    }
+
+    .icon {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+      background: rgba(0, 209, 255, .12);
+      border: 1px solid rgba(0, 209, 255, .28);
+    }
+
+    .card p { color: var(--muted); margin-top: 10px; }
+    .card ul { margin-top: 18px; color: var(--muted); }
+    .card li { padding-left: 22px; position: relative; margin-bottom: 8px; }
+    .card li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--electric);
+      font-weight: 900;
+    }
+
+    /* Portfolio */
+    .portfolio-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .1);
+      background: var(--card);
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .portfolio-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+
+    .preview {
+      height: 210px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: #04122b;
+    }
+
+    .preview-1 { background: linear-gradient(135deg, #00d1ff, #4d8dff); }
+    .preview-2 { background: linear-gradient(135deg, #ff9d5c, #ff5f7e); }
+    .preview-3 { background: linear-gradient(135deg, #7cf7c4, #00d1ff); }
+
+    .portfolio-body { padding: 24px; }
+    .portfolio-body p { color: var(--muted); margin-top: 8px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .tag {
+      font-size: .75rem;
+      padding: 6px 11px;
+      border-radius: 999px;
+      color: var(--electric);
+      background: rgba(0, 209, 255, .1);
+      border: 1px solid rgba(0, 209, 255, .25);
+    }
+
+    /* Pricing */
+    .price {
+      font-size: 2.3rem;
+      font-weight: 900;
+      color: var(--electric);
+      margin: 14px 0;
+    }
+
+    .price small { font-size: .95rem; color: var(--muted); font-weight: 500; }
+    .featured { border-color: rgba(0, 209, 255, .55); box-shadow: 0 22px 60px rgba(0, 209, 255, .15); }
+    .featured-label {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: .75rem;
+      font-weight: 800;
+      color: #04122b;
+      background: var(--electric);
+    }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 45px; align-items: center; }
+    .about-panel {
+      padding: 34px;
+      border-radius: 24px;
+      background: linear-gradient(160deg, rgba(0, 209, 255, .14), rgba(255, 255, 255, .03));
+      border: 1px solid rgba(0, 209, 255, .25);
+    }
+
+    /* FAQ */
+    .faq { max-width: 780px; margin-inline: auto; display: grid; gap: 14px; }
+
+    details {
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .035);
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      padding: 20px 24px;
+      font-weight: 750;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; color: var(--electric); font-size: 1.4rem; line-height: 1; }
+    details[open] summary::after { content: "−"; }
+    details p { padding: 0 24px 22px; color: var(--muted); }
+
+    /* Contact */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center; }
+    .contact-card {
+      padding: 34px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    .contact-list li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 18px;
+      color: var(--muted);
+    }
+
+    .contact-list strong { display: block; color: var(--white); }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid rgba(255, 255, 255, .08);
+      padding: 34px 0;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* Mobile */
+    @media (max-width: 980px) {
+      .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr 1fr; }
+      .hero { padding-top: 120px; }
+      .hero-visual { min-height: 340px; }
+    }
+
+    @media (max-width: 720px) {
+      .section { padding: 68px 0; }
+      .grid-3, .grid-2 { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: 1fr; }
+      .nav-toggle { display: block; }
+
+      .nav-links {
+        position: fixed;
+        top: 76px;
+        left: 16px;
+        right: 16px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding: 18px;
+        border-radius: 20px;
+        background: rgba(5, 11, 31, .97);
+        border: 1px solid rgba(255, 255, 255, .1);
+        box-shadow: var(--shadow);
+        transform: translateY(-18px);
+        opacity: 0;
+        visibility: hidden;
+        transition: .25s;
+      }
+
+      .nav-links.open {
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .nav-links a { padding: 12px 14px; border-radius: 12px; background: rgba(255, 255, 255, .04); }
+
+      .nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+      .nav-toggle.open span:nth-child(2) { opacity: 0; }
+      .nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+      .btn { width: 100%; }
+      .hero-actions .btn { width: auto; flex: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container nav">
+      <a href="#home" class="logo" aria-label="WebCraft Studio home">
+        <span class="logo-mark">W</span>
+        WebCraft Studio
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav-links" id="navMenu" aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#about">About</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="btn btn-primary">Get a Quote</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <span class="hero-badge">✦ AI-powered website design</span>
+          <h1>We Build Websites That <span class="accent">Grow Your Business.</span></h1>
+          <p class="lead">
+            WebCraft Studio creates fast, modern, mobile-friendly websites for small businesses using smart AI tools — so you get a premium online presence without the premium wait.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Start Your Project</a>
+            <a href="#portfolio" class="btn btn-ghost">View Our Work</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat"><strong>7+</strong><span>Days average delivery</span></div>
+            <div class="stat"><strong>100%</strong><span>Mobile responsive</span></div>
+            <div class="stat"><strong>4</strong><span>Business niches served</span></div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-hidden="true">
+          <div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="mock">
+            <div class="mock-line"></div>
+            <div class="mock-line short"></div>
+            <div class="mock-card"></div>
+            <div class="mock-card"></div>
+          </div>
+          <div class="floating-tag">Designed with AI. Built for growth.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Our Services</span>
+          <h2>Websites designed for your industry</h2>
+          <p class="lead">Every website is tailored to your business goals, customers, and brand.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card reveal">
+            <div class="icon">💼</div>
+            <h3>Business Websites</h3>
+            <p>Professional websites that build trust and turn visitors into enquiries.</p>
+            <ul>
+              <li>Service pages</li>
+              <li>Lead contact forms</li>
+              <li>Google Maps integration</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <div class="icon">🍽️</div>
+            <h3>Restaurant Websites</h3>
+            <p>Appetising restaurant sites that showcase your menu and increase orders.</p>
+            <ul>
+              <li>Digital menus</li>
+              <li>Online reservations</li>
+              <li>WhatsApp ordering</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <div class="icon">🏋️</div>
+            <h3>Gym Websites</h3>
+            <p>High-energy fitness websites that attract memberships and trial signups.</p>
+            <ul>
+              <li>Class schedules</li>
+              <li>Membership plans</li>
+              <li>Trainer profiles</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <div class="icon">🎓</div>
+            <h3>Coaching Centre Websites</h3>
+            <p>Clear, credible websites that help parents and students choose your institute.</p>
+            <ul>
+              <li>Course details</li>
+              <li>Admission enquiries</li>
+              <li>Result showcases</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <div class="icon">⚡</div>
+            <h3>AI-Powered Design</h3>
+            <p>We use AI tools to speed up research, content drafting, and design concepts.</p>
+            <ul>
+              <li>Faster delivery</li>
+              <li>Modern layouts</li>
+              <li>Human quality control</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <div class="icon">📱</div>
+            <h3>Mobile-First Builds</h3>
+            <p>Every website is tested for Android phones, tablets, and desktop screens.</p>
+            <ul>
+              <li>Fast loading</li>
+              <li>Accessible design</li>
+              <li>Clear calls to action</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section class="section" id="portfolio">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Portfolio</span>
+          <h2>Demo website concepts</h2>
+          <p class="lead">Examples of the kind of modern, conversion-focused designs we create.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="portfolio-card reveal">
+            <div class="preview preview-1">Aurora Café</div>
+            <div class="portfolio-body">
+              <h3>Restaurant Demo</h3>
+              <p>A stylish café website with menu highlights, reservation CTA, and WhatsApp ordering.</p>
+              <div class="tags"><span class="tag">Menu</span><span class="tag">Reservations</span><span class="tag">Mobile-first</span></div>
+            </div>
+          </article>
+
+          <article class="portfolio-card reveal">
+            <div class="preview preview-2">IronPulse Gym</div>
+            
